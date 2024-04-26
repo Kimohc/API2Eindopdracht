@@ -1,0 +1,137 @@
+:root {
+    --text-01: #45413E;
+    --light-01: #F9F9F9;
+    --light-02: #FFFFFF;
+    --brand-01: #DB7F67;
+    --brand-02: #F4CFC6;
+    --card-hover: 0px 4px 24px rgba(0, 0, 0, 0.15);
+    --card-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+    --hover-timing: all 0.2s ease;
+    --nav-card-size: 240px;
+
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+}
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    transition: var(--hover-timing);
+    background: var(--light-01);
+    width: 100vw;
+    overflow-x: hidden;
+}
+header {
+    height: auto;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+nav {
+    color: var(--text-01);
+    font-weight: 600;
+    height: 64px;
+    background: var(--light-01);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+nav ul.navigation-menu {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: center;
+    position: relative;
+    top: 0;
+}
+nav .navigation-menu a {
+    font-size: 16px;
+    text-decoration: none;
+    color: var(--text-01);
+}
+nav .navigation-menu > li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+nav .navigation-menu > li > a {
+    position: relative;
+    padding: 0 20px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    border-radius: 15px;
+    transition: var(--hover-timing);
+}
+nav .navigation-menu > li > a:hover {
+    color: var(--brand-01);}
+nav > #logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    grid-gap: 8px;
+    line-height: 100%;
+}
+nav > #utility {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    grid-gap: 16px;
+    margin-right: 35px;
+}
+
+footer {
+    background: var(--text-01);
+
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+
+
+footer ul {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 24px;
+    box-shadow: none;
+    margin: 10%;
+    flex: 1;
+    color: var(--light-01);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 80px;
+    list-style: none;
+}
+footer h4{
+    cursor: pointer;
+}
+footer h4:hover{
+    color: var(--brand-01);
+}
+
+
+footer ul li a {
+    color: var(--light-01);
+    text-decoration: none;
+    font-size: 14px;
+}
+
+
+footer ul li {
+    color: var(--light-01);
+    padding: 0;
+}
+footer ul li a:hover{
+    color: var(--brand-01);
+    cursor: pointer;
+}
