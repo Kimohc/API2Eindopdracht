@@ -1,12 +1,14 @@
 import VueRouter from 'vue-router';
 import Vue from 'vue';
 import Home from "@/views/home.vue";
-
+import Dieren from "@/views/dieren.vue";
+import Login from "@/views/login.vue";
 Vue.use(VueRouter);
 
 const routes = [
-    { path: '/', component: Home, },
-
+    { path: '/', component: Home,  },
+    { path: '/dieren', component: Dieren},
+    { path: '/login', component: Login},
 
 ];
 

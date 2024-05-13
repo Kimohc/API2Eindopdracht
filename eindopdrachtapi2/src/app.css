@@ -109,7 +109,6 @@ footer ul {
     color: var(--light-01);
     font-size: 18px;
     font-weight: 600;
-    margin-bottom: 80px;
     list-style: none;
 }
 footer h4{
@@ -134,4 +133,38 @@ footer ul li {
 footer ul li a:hover{
     color: var(--brand-01);
     cursor: pointer;
+}
+.dier-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 16px;
+    background: var(--light-02);
+    border: 2px solid black;
+    border-radius: 15px;
+}
+.dier-div img{
+    border-radius: 15px;
+    height: 60vh;
+}
+.dier-icons{
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20%;
+    display: flex;
+}
+.dier-icons svg:hover{
+    color: var(--brand-01);
+    cursor: pointer;
+}
+.container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 16px;
 }

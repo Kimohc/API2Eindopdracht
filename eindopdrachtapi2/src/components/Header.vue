@@ -11,10 +11,9 @@
       </div>
       <ul class="navigation-menu">
         <li> <router-link :to="{path: '/'}">Home</router-link></li>
-
+        <li><router-link :to="{path: '/dieren'}">Dieren </router-link></li>
       </ul>
       <div id="utility" v-if="LoggedIn">
-
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="log-in"
              xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd"
 d="M16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086
@@ -24,7 +23,7 @@ d="M16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086
 
       </div>
       <div id="utility" v-else>
-
+        <router-link :to="{path: '/login'}">
         <svg
             width="24"
             height="24"
@@ -38,7 +37,7 @@ d="M16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086
               d="M10.1582 17.385L8.73801 15.9768L12.6572 12.0242L3.51428 12.0242C2.96199 12.0242 2.51428 11.5765 2.51428 11.0242C2.51429 10.4719 2.962 10.0242 3.51429 10.0242L12.6765 10.0242L8.69599 6.0774L10.1042 4.6572L16.4951 10.9941L10.1582 17.385Z"
               fill="currentColor"/>
         </svg>
-
+        </router-link>
 
       </div>
     </nav>
