@@ -1,23 +1,5 @@
 <template>
   <footer>
-
-    <ul>
-      Services
-      <li> </li>
-      <li><a href="#">Steun een asiel</a></li>
-      <li> </li>
-      <li> </li>
-      <li><a href="#">Meld je aan voor onze nieuwsbrief</a></li>
-    </ul>
-
-    <ul>
-      Dieren
-     <li>    </li>
-      <li></li>
-      <li></li>
-    </ul>
-
-
     <ul>
       FAQ
       <li v-for="(faq, index) in faqs" :key="index">

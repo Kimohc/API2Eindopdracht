@@ -164,13 +164,19 @@ async def get_new_acces_token(username: str):
 
 
 @app.get('/dieren', status_code=status.HTTP_200_OK)
-async def get_alle_dieren(db: db_dependency, soort: int):
+async def get_alle_dieren(db: db_dependency, soort: int, ):
     return db.query(models.Dier).where(models.Dier.soort == soort).all()
 
 
 @app.get("/dier", status_code=status.HTTP_200_OK)
-async def get_dier(db: db_dependency, limit: int, offset: int, soort: int):
+async def get_dier(db: db_dependency, limit: int, offset: int, soort: int,
+                   current_user: UserInDB = Depends(get_current_user)):
     return db.query(models.Dier).where(models.Dier.soort == soort).limit(limit).offset(offset).all()
+
+
+@app.get("/dier/{dier_id}", status_code=status.HTTP_200_OK)
+async def get_dier_by_id(dier_id: int, db: db_dependency):
+    return db.query(models.Dier).where(models.Dier.dier_id == dier_id).first()
 
 
 @app.get("/random", status_code=status.HTTP_200_OK)
@@ -179,3 +185,25 @@ async def get_random(db: db_dependency, soort: int):
     dieren_count = len(alle_dieren)
     offset = r.choice(range(0, dieren_count))
     return {"offset": offset, "length": dieren_count}
+
+
+@app.post('/reservering/', status_code=status.HTTP_201_CREATED)
+async def maak_reservering(reservering: ReserveringBase, db: db_dependency,
+                           current_user: UserInDB = Depends(get_current_user)):
+    db_reservering = models.Reservering(**reservering.dict())
+    db.add(db_reservering)
+    db.commit()
+    db.refresh(db_reservering)
+    return db_reservering
+
+
+@app.get('/reserveringen', status_code=status.HTTP_200_OK)
+async def get_reserveringen(db: db_dependency, current_user: UserInDB = Depends(get_current_user)):
+    return db.query(models.Reservering).where(models.Reservering.gebruiker_id == current_user.gebruiker_id).all()
+
+
+@app.delete('/reservering/{reservering_id}', status_code=status.HTTP_200_OK)
+async def delete_reservering(reservering_id: int, db: db_dependency,  current_user: UserInDB = Depends(get_current_user)):
+    db.query(models.Reservering).where(models.Reservering.reservering_id == reservering_id).delete()
+    db.commit()
+    return {"message": "reservering verwijderd"}

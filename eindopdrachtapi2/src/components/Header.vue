@@ -10,17 +10,12 @@
         Jakubski's <br> Dieren
       </div>
       <ul class="navigation-menu">
-        <li> <router-link :to="{path: '/'}">Home</router-link></li>
-        <li><router-link :to="{path: '/dieren'}">Dieren </router-link></li>
+        <li> <router-link :to="{path: `/home`}">Home</router-link></li>
+        <li><router-link :to="{path: `/dieren`}">Dieren </router-link></li>
       </ul>
-      <div id="utility" v-if="LoggedIn">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="log-in"
-             xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd"
-d="M16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086
- 5 12 5C14.2091 5 16 6.79086 16 9ZM14 9C14 10.1046 13.1046 11 12 11C10.8954 11 10 10.1046 10 9C10 7.89543 10.8954 7 12 7C13.1046 7 14 7.89543 14 9Z" fill="currentColor" /><path fill-rule="evenodd" clip-rule="evenodd" d="M12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487
-  23 12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1ZM3 12C3 14.0902 3.71255 16.014 4.90798 17.5417C6.55245 15.3889 9.14627 14 12.0645
-        14C14.9448 14 17.5092 15.3531 19.1565 17.4583C20.313 15.9443 21 14.0524 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12ZM12 21C9.84977 21 7.87565 20.2459 6.32767 18.9878C7.59352 17.1812 9.69106 16 12.0645 16C14.4084 16 16.4833 17.1521 17.7538 18.9209C16.1939 20.2191 14.1881 21 12 21Z" fill="currentColor" /></svg>
-
+      <div id="utility" v-if="logged_in">
+       <router-link :to="{path: `/favorieten`}"> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.14648 12.2929C8.36544 11.5118 8.36544 10.2455 9.14648 9.46444C9.92753 8.68339 11.1939 8.68339 11.9749 9.46444L12 9.48955L12.0251 9.46449C12.8061 8.68345 14.0725 8.68345 14.8535 9.46449C15.6346 10.2455 15.6346 11.5119 14.8535 12.2929L12.0251 15.1213L12 15.0962L11.9749 15.1213L9.14648 12.2929Z" fill="currentColor" /><path fill-rule="evenodd" clip-rule="evenodd" d="M3 4C3 2.34315 4.34315 1 6 1H18C19.6569 1 21 2.34315 21 4V20C21 21.6569 19.6569 23 18 23H6C4.34315 23 3 21.6569 3 20V4ZM6 3H18C18.5523 3 19 3.44772 19 4V20C19 20.5523 18.5523 21 18 21H6C5.44772 21 5 20.5523 5 20V4C5 3.44772 5.44772 3 6 3Z" fill="currentColor" /></svg> </router-link>
+       <router-link :to="{path: '/home'}"> <svg v-on:click="logOut" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.51428 20H4.51428C3.40971 20 2.51428 19.1046 2.51428 18V6C2.51428 4.89543 3.40971 4 4.51428 4H8.51428V6H4.51428V18H8.51428V20Z" fill="currentColor" /><path d="M13.8418 17.385L15.262 15.9768L11.3428 12.0242L20.4857 12.0242C21.038 12.0242 21.4857 11.5765 21.4857 11.0242C21.4857 10.4719 21.038 10.0242 20.4857 10.0242L11.3236 10.0242L15.304 6.0774L13.8958 4.6572L7.5049 10.9941L13.8418 17.385Z" fill="currentColor" /></svg></router-link>
       </div>
       <div id="utility" v-else>
         <router-link :to="{path: '/login'}">
@@ -49,16 +44,28 @@ d="M16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086
 
 export default {
   name: 'MyHeader',
+  props:{
+    logged_in: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       title: 'My Component',
       message: 'This is my custom Vue component!',
-      LoggedIn: false,
-      Account: {},
     };
   },
   mounted() {
 
+  },
+  methods:{
+    logOut(){
+      this.$store.commit('setLoggedIn', false);
+      this.$store.commit('setAccess_Token', '');
+      location.reload()
+    }
   }
+
 };
 </script>
