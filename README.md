@@ -104,19 +104,19 @@ npm run serve
 
 
 ### Installation
-Clone the repo
+1. Clone the repo
 ```sh
 git clone https://github.com/github_username/repo_name.git
 ```
-3. Install Pip packages
+2. Install Pip packages
 ```sh
 pip install
 ```
-4. Start de API
+3. Start de API
 ```py
 uvicorn index:app --reload
 ```
-5. Start de Vue app
+4. Start de Vue app
 ```sh
 npm run serve
 ```
