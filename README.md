@@ -1,2 +1,2 @@
 # API2Eindopdracht
-Een app waarin je uit verscheidenen dieren kunt kiezen
+<h2>Een goeie app</h2>
