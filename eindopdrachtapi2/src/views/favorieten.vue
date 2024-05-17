@@ -3,6 +3,7 @@
   <my-header :logged_in="logged_in"></my-header>
   <div class="alert-container">
     <my-alert ref="myAlert"></my-alert>
+    <my-confirm ref="myConfirm" @result="userResult"></my-confirm>
   </div>
     <div class="dieren-container" >
       <h2>Favoriten: </h2>
@@ -10,7 +11,7 @@
         <div class="dier" v-for="dier in dieren" :key="dier.dier_id">
           <img :src="dier.foto" alt="">
           <h3>{{dier.naam}}</h3>
-          <button v-on:click="annuleerReservering(dier.reservering_id)">Annuleer</button>
+          <button v-on:click="confirmReserveringCancellation(dier.reservering_id)">Annuleer</button>
         </div>
       </div>
   </div>
@@ -23,12 +24,14 @@ import '/src/app.css';
 import MyFooter from "@/components/Footer.vue";
 import axios from "axios";
 import MyAlert from "@/components/Alert.vue";
+import MyConfirmationModal from "@/components/Confirm.vue";
 export default {
   name: 'App',
   components: {
     'my-footer': MyFooter,
     'my-header': MyHeader,
     'my-alert': MyAlert,
+    'my-confirm': MyConfirmationModal,
   },
   data() {
     return {
@@ -45,6 +48,22 @@ export default {
       this.$refs.myAlert.message = message
       this.$refs.myAlert.isGood = isGood
     },
+    showConfirmationModal(message){
+      this.$refs.myConfirm.text = message
+      this.$refs.myConfirm.show()
+    },
+    confirmReserveringCancellation(reservering_id) {
+      this.pendingReserveringId = reservering_id;
+      this.showConfirmationModal("Weet je zeker dat je deze reservering wilt annuleren?");
+    },
+    async userResult(result) {
+      if (result === 1 && this.pendingReserveringId) {
+        await this.annuleerReservering(this.pendingReserveringId);
+      }
+      this.pendingReserveringId = null;
+    },
+
+
     async getFavorieten() {
       try {
         let response = await axios.get(`http://127.0.0.1:8000/reserveringen`, {
@@ -90,7 +109,9 @@ export default {
         this.reserveringen = []
         this.dieren = []
         await this.getFavorieten()
-      } catch (error) {
+
+      }
+      catch (error) {
         this.showAlert("nieuwe token ophalen", true)
         let responseNieuweAcces_token = await axios.get(`http://127.0.0.1:8000/refresh?username=${this.user.username}`)
         this.access_token = responseNieuweAcces_token.data.access_token

@@ -350,14 +350,16 @@ body.open-modal .modal-window {
 }
 .dieren-container{
     text-align: center;
-
+    width: 100%;
+    height: 100vh;
 }
 
 .dieren{
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
     grid-gap: 16px;
 }
 .dier {
